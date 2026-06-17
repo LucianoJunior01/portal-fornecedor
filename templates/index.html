@@ -29,26 +29,39 @@
             <i class="bi bi-file-earmark-text"></i> Preencha os dados da Nota Fiscal
         </div>
         <div class="card-body">
+
+            <div class="alert alert-info">
+                <i class="bi bi-info-circle"></i> Se o fornecedor ou produto ainda não existirem no sistema, 
+                eles serão cadastrados automaticamente.
+            </div>
+
             <form method="POST" action="/enviar">
+                <h6 class="text-muted mt-2">Dados do Fornecedor</h6>
+                <div class="row g-3 mb-3">
+                    <div class="col-md-8">
+                        <label class="form-label">Nome do Fornecedor *</label>
+                        <input type="text" name="fornecedor_nome" class="form-control" required>
+                    </div>
+                    <div class="col-md-4">
+                        <label class="form-label">CNPJ (opcional)</label>
+                        <input type="text" name="fornecedor_cnpj" class="form-control" placeholder="00.000.000/0000-00">
+                    </div>
+                </div>
+
+                <h6 class="text-muted">Dados do Produto</h6>
+                <div class="row g-3 mb-3">
+                    <div class="col-md-4">
+                        <label class="form-label">Código do Produto *</label>
+                        <input type="text" name="produto_codigo" class="form-control" required placeholder="Ex: 72727753">
+                    </div>
+                    <div class="col-md-8">
+                        <label class="form-label">Nome do Produto *</label>
+                        <input type="text" name="produto_nome" class="form-control" required placeholder="Usado apenas se o código for novo">
+                    </div>
+                </div>
+
+                <h6 class="text-muted">Dados da Nota Fiscal</h6>
                 <div class="row g-3">
-                    <div class="col-md-6">
-                        <label class="form-label">Fornecedor *</label>
-                        <select name="fornecedor_id" class="form-select" required>
-                            <option value="">Selecione...</option>
-                            {% for f in fornecedores %}
-                            <option value="{{ f['id'] }}">{{ f['nome'] }}</option>
-                            {% endfor %}
-                        </select>
-                    </div>
-                    <div class="col-md-6">
-                        <label class="form-label">Produto *</label>
-                        <select name="produto_id" class="form-select" required>
-                            <option value="">Selecione...</option>
-                            {% for p in produtos %}
-                            <option value="{{ p['id'] }}">{{ p['nome'] }} ({{ p['codigo'] }})</option>
-                            {% endfor %}
-                        </select>
-                    </div>
                     <div class="col-md-4">
                         <label class="form-label">Número da NF *</label>
                         <input type="text" name="numero_nf" class="form-control" placeholder="Ex: 000123" required>
